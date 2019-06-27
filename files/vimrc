@@ -242,8 +242,6 @@
 " { General options
     set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
     set completeopt=noinsert,menuone,noselect
-    " Don't redraw while executing macros (good performance config)
-    set lazyredraw
     set cb=unnamedplus
     set completefunc=syntaxcomplete#Complete
     set cursorline
@@ -277,14 +275,6 @@ if has('persistent_undo')
 endif
 
 " ==================== KeyMap ========================
-" Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down
-" one entire line. with line wrapping on, this can cause the cursor to
-" actually skip a few lines on the screen because it's moving from line N to
-" line N+1 in the file. I want this to act more visually -- I want `down' to
-" mean the next line on the screen
-nmap j gj
-nmap k gk`
-
 nmap <F8> :TagbarToggle<CR>
 nnoremap <F5> :UndotreeToggle<cr>
 

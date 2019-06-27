@@ -1,7 +1,7 @@
 [user]
     email = agrry@yandex.ru
     name = Ruslan Knyazev
-    signingkey = AC12CDFE8C7B22C0
+    signingkey = 847F6F9D63DF8984AD24BF352CFACAE69680737C
 [push]
     default = tracking
 [diff]
