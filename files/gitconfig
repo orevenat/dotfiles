@@ -7,6 +7,8 @@
 [diff]
     compactionHeuristic = true
     algorithm = patience
+[color]
+  ui = auto
 [commit]
     gpgsign = true
 [core]
@@ -18,6 +20,7 @@
 	author  = "%C(blue)%<(15)%ad%C(reset) %C(yellow)%h%C(reset) | %<(50,trunc)%s| %C(green)%<(20,trunc)%an%C(reset) |"
 	graph = "\t%C(blue)%<(15)%ad%C(reset) %C(yellow)%h%C(reset) %s (%C(green)%an%C(reset)) %C(auto)%d"
 [alias]
+    up = pull --rebase
     co = checkout
     ci = commit
     ca = commit --amend
@@ -25,6 +28,9 @@
     st = status
     br = branch
     ai = add --intent-to-add
+    hist = log --graph --decorate --oneline
+    lt = describe --abbrev=0 --tags
+    put = !git up && git push origin HEAD
     mff = merge --ff-only
     sdiff = diff --staged
 
