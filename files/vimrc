@@ -1,0 +1,390 @@
+" { Plugins
+    call plug#begin('~/.vim/plugged')
+
+    " General
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-dispatch'
+    Plug 'tpope/vim-endwise'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-git'
+    Plug 'tpope/vim-repeat'
+    Plug 'tpope/vim-rhubarb'
+    Plug 'tpope/vim-sensible'
+    Plug 'tpope/vim-surround'
+    Plug 'janko-m/vim-test'
+    Plug 'w0rp/ale'
+
+    " Search and navigation
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
+    Plug 'dyng/ctrlsf.vim'
+    Plug 'jlanzarotta/bufexplorer'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'jasoncodes/ctrlp-modified.vim'
+    Plug 'scrooloose/nerdtree'
+    Plug 'ruanyl/vim-gh-line'
+
+    " Autocomplete
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/neocomplete'
+    Plug 'Shougo/neosnippet'
+    Plug 'Shougo/neosnippet-snippets'
+
+    " Advanced
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'ConradIrwin/vim-bracketed-paste'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'kassio/neoterm'
+    Plug 'majutsushi/tagbar'
+    Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+    " Plug 'Valloric/MatchTagAlways'
+    Plug 'terryma/vim-multiple-cursors'
+    Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+    Plug 'kana/vim-textobj-user'
+    Plug 'powerman/vim-plugin-AnsiEsc'
+    Plug 'inkarkat/vim-ingo-library'
+    Plug 'inkarkat/vim-SyntaxRange'
+
+    " Tools integration
+    Plug 'hashivim/vim-vagrant'
+    Plug 'wfleming/vim-codeclimate'
+    Plug 'rizzatti/dash.vim'
+
+    " Languages support
+    Plug 'chase/vim-ansible-yaml'
+    Plug 'kchmck/vim-coffee-script'
+    Plug 'othree/html5.vim'
+    Plug 'tpope/vim-haml'
+    Plug 'tpope/vim-markdown'
+    Plug 'slim-template/vim-slim'
+    Plug 'tmux-plugins/vim-tmux'
+    Plug 'Glench/Vim-Jinja2-Syntax'
+    Plug 'lmeijvogel/vim-yaml-helper'
+    Plug 'kylef/apiblueprint.vim'
+    Plug 'IN3D/vim-raml'
+    Plug 'fidian/hexmode'
+    Plug 'martinda/Jenkinsfile-vim-syntax'
+    Plug 'jvirtanen/vim-hcl'
+
+    " C/C++
+    Plug 'rhysd/vim-clang-format'
+
+    " Clojure
+    Plug 'guns/vim-clojure-highlight'
+    Plug 'guns/vim-clojure-static'
+    Plug 'guns/vim-slamhound'
+    Plug 'tpope/vim-classpath'
+    Plug 'tpope/vim-fireplace'
+    Plug 'tpope/vim-salve'
+    Plug 'venantius/vim-eastwood'
+    Plug 'venantius/vim-cljfmt'
+    Plug 'vim-scripts/paredit.vim'
+
+    " Elixir
+    Plug 'elixir-lang/vim-elixir'
+    Plug 'thinca/vim-ref'
+    Plug 'awetzel/elixir.nvim', { 'do': 'yes \| ./install.sh' }
+    Plug 'slashmili/alchemist.vim'
+    Plug 'c-brenn/phoenix.vim'
+
+    " " Erlang
+    " Plug 'vim-erlang/vim-erlang-runtime'
+    " Plug 'vim-erlang/vim-erlang-compiler'
+    " Plug 'vim-erlang/vim-erlang-omnicomplete'
+    " Plug 'vim-erlang/vim-erlang-tags'
+
+    " Haskell
+    Plug 'eagletmt/ghcmod-vim'
+    Plug 'eagletmt/neco-ghc'
+    Plug 'mpickering/hlint-refactor-vim'
+    Plug 'neovimhaskell/haskell-vim'
+    Plug 'twinside/vim-hoogle'
+
+    " JavaScript
+    Plug 'pangloss/vim-javascript'
+    Plug 'mxw/vim-jsx'
+    Plug 'mtscout6/vim-cjsx'
+    Plug 'flowtype/vim-flow'
+    Plug 'moll/vim-node'
+
+    " Ruby, Rails
+    Plug 'tpope/vim-bundler'
+    Plug 'tpope/vim-rails'
+    Plug 'vim-ruby/vim-ruby'
+    Plug 'sunaku/vim-ruby-minitest'
+    Plug 'thoughtbot/vim-rspec'
+    Plug 'tpope/vim-rvm'
+    Plug 'p0deje/vim-ruby-interpolation'
+
+    " Themes
+    Plug 'nanotech/jellybeans.vim'
+
+    call plug#end()
+
+    " { Plugin configuration
+	let mapleader = "\<Space>"
+
+        " { Alchemist (Elixir)
+            let g:alchemist_iex_term_size = 15
+            let g:alchemist_iex_term_split = 'split'
+            let g:alchemist_tag_disable = 1
+            let g:elixir_autobuild = 1
+            let g:elixir_docpreview = 1
+        " }
+
+        " { BufExplorer
+            let g:bufExplorerShowRelativePath=1
+        " }
+
+        " { CtrlP
+            if executable('rg')
+              set grepprg=rg\ --color=never
+              let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+              let g:ctrlp_use_caching = 0
+            endif
+        " }
+
+        " { CtrlSF
+            nmap     <C-F>f <Plug>CtrlSFPrompt
+            vmap     <C-F>f <Plug>CtrlSFVwordPath
+            vmap     <C-F>F <Plug>CtrlSFVwordExec
+            nmap     <C-F>n <Plug>CtrlSFCwordPath
+            nmap     <C-F>p <Plug>CtrlSFPwordPath
+            nnoremap <C-F>o :CtrlSFOpen<CR>
+            nnoremap <C-F>t :CtrlSFToggle<CR>
+            inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+        " }
+
+        " { Fireplace (Clojure)
+            nmap <Leader>r :RunTests<CR>
+            autocmd User FireplacePreConnect call fireplace#register_port_file(expand('./nrepl-port'), '/')
+        " }
+
+        " { Ghc-mod (Haskell)
+            hi ghcmodType ctermbg=yellow
+            let g:ghcmod_type_highlight = 'ghcmodType'
+        " }
+
+        " { Haskell-vim
+            let g:haskellmode_completion_ghc = 0
+        " }
+
+        " { Jellybeans
+            silent! colorscheme jellybeans
+            let g:jellybeans_use_term_background_color = 1
+        " }
+
+        " { Vim-jsx
+            let g:jsx_ext_required = 0
+        " }
+
+        " { Vim-markdown
+            let g:markdown_fenced_languages = ['clojure', 'ruby']
+        " }
+
+        " { Ale
+            let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
+            let g:ale_linters = {
+            \   'ruby': ['ruby', 'rubocop', 'reek', 'flog'],
+            \}
+            let g:ale_set_highlights = 0
+        " }
+
+        " " { Neomake
+        "     let g:neomake_elixir_enabled_makers = ['credo', 'mix']
+        "     let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
+        "     let g:neomake_ruby_enabled_makers = ['mri', 'rubocop', 'reek', 'brakeman']
+        " " }
+
+        " { Neoterm
+            let g:neoterm_automap_keys = ',tt'
+            let g:neoterm_use_relative_path = 1
+            let g:neoterm_shell = 'bash -login'
+
+            nnoremap <silent> ,tc :call neoterm#kill()<cr>
+            nnoremap <silent> ,th :call neoterm#close()<cr>
+            nnoremap <silent> ,tl :call neoterm#clear()<cr>
+            nnoremap <silent> <f10> :TREPLSendFile<cr>
+            nnoremap <silent> <f9> :TREPLSend<cr>
+            vnoremap <silent> <f9> :TREPLSend<cr>
+        " }
+
+        " { NERDTree
+			let NERDTreeIgnore = ['\.pyc$', '\.retry$']
+
+            nmap <C-\> :NERDTreeFind<CR>
+            nmap <silent> <leader><leader> :NERDTreeToggle<CR>
+
+        " }
+
+		" { fzf
+			nnoremap <Leader>o :GFiles .<CR>
+            nnoremap <leader>fc :Commits<CR>
+            nnoremap <leader>ff :Files<CR>
+            nnoremap <leader>fa :Ag<CR>
+			nnoremap <leader>b :Buffers<CR>
+		" }
+
+        " { Vim-test
+            let test#strategy = "neovim"
+
+            nmap <silent> <leader>rt :TestSuite<CR>
+            nmap <silent> <leader>rf :TestFile<CR>
+            nmap <silent> <leader>rn :TestNearest<CR>
+            nmap <silent> <leader>rr :TestLast<CR>
+            nmap <silent> <leader>g :TestVisit<CR>
+        " }
+    " }
+" }
+
+" { General options
+    set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+    set completeopt=noinsert,menuone,noselect
+    " Don't redraw while executing macros (good performance config)
+    set lazyredraw
+    set cb=unnamedplus
+    set completefunc=syntaxcomplete#Complete
+    set cursorline
+    set diffopt+=vertical
+    set expandtab
+    set hidden
+    set hlsearch
+    set ignorecase
+    set lazyredraw
+    set nobackup
+    set nocursorline
+    set noswapfile
+    set nowb
+    set nowrap
+    set number
+    set pastetoggle=<F2>
+    set shiftwidth=4
+    set smartcase
+    set splitbelow
+    set splitright
+    set tabstop=4
+" }
+
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
+if has('persistent_undo')
+  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  set undodir=~/.vim/backups
+  set undofile
+endif
+
+" ==================== KeyMap ========================
+" Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down
+" one entire line. with line wrapping on, this can cause the cursor to
+" actually skip a few lines on the screen because it's moving from line N to
+" line N+1 in the file. I want this to act more visually -- I want `down' to
+" mean the next line on the screen
+nmap j gj
+nmap k gk`
+
+nmap <F8> :TagbarToggle<CR>
+nnoremap <F5> :UndotreeToggle<cr>
+
+nmap <silent> <leader>d <Plug>DashSearch
+
+" Map ctrl-movement keys to window switching
+map <C-k> <C-w><Up>
+map <C-j> <C-w><Down>
+map <C-l> <C-w><Right>
+map <C-h> <C-w><Left>
+nnoremap <silent> <bs> <C-w><Left>
+
+" upper/lower word
+nmap <leader>u mQviwU`Q
+nmap <leader>l mQviwu`Q
+
+nmap <silent> // :nohlsearch<CR>
+noremap ,h1 :set hlsearch! hlsearch?<CR>
+
+" set text wrapping toggles
+nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+
+" find merge conflict markers
+nmap <silent> <leader>fm <ESC>/\v^[<=>]{7}( .*\|$ )<CR>
+
+" save file
+nnoremap <Leader>w :w<CR>
+
+" ctrlp git modified
+map <Leader>m :CtrlPModified<CR>
+map <Leader>M :CtrlPBranch<CR>
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Allows you to enter sudo pass and save the file
+" when you forgot to open your file with sudo
+cmap w!! %!sudo tee > /dev/null null%
+
+" Allow to copy/paste between VIM instances
+" copy the current visual selection to ~/.vbuf
+vmap <Leader>y :w! ~/.vbuf<CR>
+" copy the current line to the buffer file if no visual selection
+nmap <Leader>y :.w! ~/.vbuf<CR>
+" paste the contents of the buffer file
+nmap <Leader>p :r ~/.vbuf<CR>
+
+augroup au_common
+    au!
+
+    " Automatically removing all trailing whitespace
+    au BufWritePre * :%s/\s\+$//e
+
+    au BufRead,BufNewFile {Capfile,Gemfile,Guardfile,Vagrantfile,*.prawn} set ft=ruby
+    au BufRead,BufNewFile {.babelrc,.eslintrc} set ft=json
+augroup END
+
+augroup ft_gitcommit
+    au!
+    au FileType gitcommit setlocal spell spelllang=en_us
+augroup END
+
+augroup ft_haskell
+    au!
+    au BufWritePost *.hs GhcModCheckAndLintAsync
+    au FileType haskell setlocal makeprg=stack
+    au FileType haskell setlocal omnifunc=necoghc#omnifunc
+    au FileType haskell nnoremap <silent><buffer> gfs :GhcModSplitFunCase<CR>
+    au FileType haskell nnoremap <silent><buffer> git :GhcModTypeInsert<CR>
+    au FileType haskell nnoremap <silent><buffer> gtt :GhcModType<CR>
+    au FileType haskell nnoremap <silent><buffer> gct :GhcModTypeClear<CR>
+augroup END
+
+augroup ft_markdown
+    au!
+    au FileType markdown setlocal spell spelllang=ru_ru,en_us
+    au FileType markdown setlocal wrap
+augroup END
+
+augroup ft_ruby
+    au FileType ruby call SyntaxRange#IncludeEx('keepend start="\%(<<[-\~]SQL\>.*\n\)\@<=" end="SQL" containedin=ALL', 'sql')
+augroup END
+
+augroup set_omnifunc
+    au!
+    au FileType css            setlocal omnifunc=csscomplete#CompleteCSS
+    au FileType html,markdown  setlocal omnifunc=htmlcomplete#CompleteTags
+    au FileType javascript     setlocal omnifunc=javascriptcomplete#CompleteJS
+    au FileType python         setlocal omnifunc=pythoncomplete#Complete
+    au FileType xml            setlocal omnifunc=xmlcomplete#CompleteTags
+augroup END
+
+augroup set_shift_width
+    au!
+    au FileType ruby  setl sw=2 sts=2 et
+    au FileType eruby setl sw=2 sts=2 et
+    au FileType javascript setl sw=2 sts=2 et
+    au FileType yaml setl sw=2 sts=2 et
+augroup END
+
+command! J :%!python -mjson.tool

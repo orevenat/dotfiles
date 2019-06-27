@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  tasks:
+    - name: vim
+      import_tasks: playbooks/vim.yml
+      tags: vim
+
+    - name: dotfiles
+      import_tasks: playbooks/dotfiles.yml
+      tags: dotfiles

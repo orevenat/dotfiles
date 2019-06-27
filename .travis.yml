@@ -1,0 +1,20 @@
+---
+
+language: python
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      python: "2.7"
+    - os: osx
+      language: generic
+
+cache: pip
+
+install:
+  - pip2 install ansible
+  - pip2 install ansible-lint
+
+script:
+  - make test

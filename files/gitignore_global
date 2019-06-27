@@ -1,0 +1,10 @@
+.DS_Store
+.retry
+.vagrant
+.vscode
+*.log
+.byebug_history
+/tmp
+/coverage
+.rspec-local
+.tool-versions

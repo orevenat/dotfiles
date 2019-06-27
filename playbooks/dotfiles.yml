@@ -1,0 +1,64 @@
+- name: .gitconfig
+  file: src={{ playbook_dir }}/files/gitconfig dest=~/.gitconfig state=link force=yes
+  tags: git
+
+- name: .gitignore_global
+  file: src={{ playbook_dir }}/files/gitignore_global dest=~/.gitignore_global state=link force=yes
+  tags: git
+
+# - name: .tmux.conf
+#   file: src={{ playbook_dir }}/files/tmux.conf dest=~/.tmux.conf state=link force=yes
+#   tags: tmux
+
+- name: .inputrc
+  file: src={{ playbook_dir }}/files/inputrc dest=~/.inputrc state=link force=yes
+  tags: bash
+
+# - block:
+#   - name: .lein
+#     file: path=~/.lein state=directory
+#   - name: .lein/profiles.clj
+#     file: src={{ playbook_dir }}/files/profiles.clj dest=~/.lein/profiles.clj state=link force=yes
+#   tags: [clojure, lein]
+
+- name: ruby configs
+  file: src={{ playbook_dir }}/files/{{ item }} dest=~/.{{ item }} state=link force=yes
+  with_items:
+    - gemrc
+    - irbrc
+    - pryrc
+    - rubocop.yml
+  tags: ruby
+
+# - name: .haskeline
+#   file: src={{ playbook_dir }}/files/haskeline dest=~/.haskeline state=link force=yes
+#   tags: haskell
+
+- name: .eslintrc.json
+  file: src={{ playbook_dir }}/files/eslintrc.json dest=~/.eslintrc.json state=link force=yes
+  tags: js
+
+# - block:
+#   - name: .vagrant.d
+#     file: path=~/.vagrant.d state=directory
+#   - name: .vagrant.d/Vagrantfile
+#     file: src={{ playbook_dir }}/files/vagrant.d/Vagrantfile dest=~/.vagrant.d/Vagrantfile state=link force=yes
+#   tags: vagrant
+
+- name: .bash_profile
+  blockinfile:
+    dest: ~/.bash_profile
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    state: present
+    create: yes
+    backup: yes
+    content: |
+      export EDITOR=nvim
+      export PS1='$(__git_ps1) \W λ '
+      alias vi='nvim'
+      function jcurl() {
+        curl "$@" | json | pygmentize -l igor
+      }
+      export -f jcurl
+  tags: bash
+
