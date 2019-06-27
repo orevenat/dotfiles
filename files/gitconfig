@@ -43,7 +43,7 @@
     unignore = update-index --no-assume-unchanged
     ignored = !git ls-files -v | grep '^h'
 [gpg]
-	program = gpg2
+	program = gpg
 [log]
 	date = format:"%d-%b-%y %H:%M"
 [filter "lfs"]
