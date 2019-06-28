@@ -214,7 +214,7 @@
         " { NERDTree
 			let NERDTreeIgnore = ['\.pyc$', '\.retry$']
 
-            nmap <C-\> :NERDTreeFind<CR>
+            nmap <C-m> :NERDTreeFind<CR>
             nmap <silent> <leader><leader> :NERDTreeToggle<CR>
 
         " }
