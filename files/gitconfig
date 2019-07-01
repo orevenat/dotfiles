@@ -1,7 +1,7 @@
 [user]
     email = agrry@yandex.ru
     name = Ruslan Knyazev
-    ; signingkey = 847F6F9D63DF8984AD24BF352CFACAE69680737C
+    signingkey = 850725111578E996
 [push]
     default = tracking
 [diff]
@@ -48,8 +48,8 @@
     ignore = update-index --assume-unchanged
     unignore = update-index --no-assume-unchanged
     ignored = !git ls-files -v | grep '^h'
-; [gpg]
-; 	program = gpg
+[gpg]
+    program = gpg
 [log]
 	date = format:"%d-%b-%y %H:%M"
 [filter "lfs"]
