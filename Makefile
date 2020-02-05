@@ -3,6 +3,7 @@ install:
 
 vim:
 				ansible-playbook playbook.yml -i local --tags=vim
+				ln -s $(PWD)/files/coc-settings.json ~/.config/nvim/coc-settings.json | true
 
 install_ansible:
 				sudo apt-get install software-properties-common

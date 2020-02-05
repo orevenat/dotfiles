@@ -1,10 +1,19 @@
+setglobal nocompatible
+setglobal pastetoggle=<F2>
+
+set ttyfast
+set lazyredraw
+
+let g:python_host_skip_check=1
+let g:loaded_python3_provider=1
+
 " { Plugins
     call plug#begin('~/.vim/plugged')
 
     " General
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-dispatch'
-    Plug 'tpope/vim-endwise'
+    "Plug 'tpope/vim-endwise'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-git'
     Plug 'tpope/vim-repeat'
@@ -12,7 +21,6 @@
     Plug 'tpope/vim-sensible'
     Plug 'tpope/vim-surround'
     Plug 'janko-m/vim-test'
-    Plug 'w0rp/ale'
 
     " Search and navigation
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -61,7 +69,7 @@
     Plug 'dhruvasagar/vim-table-mode', { 'for': 'markdown' }
     Plug 'shime/vim-livedown', { 'for': 'markdown' }
 
-    Plug 'slim-template/vim-slim'
+    Plug 'slim-template/vim-slim', { 'for': ['slim', 'slime'] }
     Plug 'tmux-plugins/vim-tmux'
     Plug 'Glench/Vim-Jinja2-Syntax'
     Plug 'lmeijvogel/vim-yaml-helper'
@@ -113,20 +121,26 @@
     Plug 'moll/vim-node'
 
     " Ruby, Rails
-    Plug 'tpope/vim-bundler'
-    Plug 'tpope/vim-rails'
-    Plug 'vim-ruby/vim-ruby'
-    Plug 'sunaku/vim-ruby-minitest'
-    Plug 'thoughtbot/vim-rspec'
-    Plug 'tpope/vim-rvm'
-    Plug 'p0deje/vim-ruby-interpolation'
+    Plug 'tpope/vim-rails', { 'for': 'ruby' }
+    Plug 'tpope/vim-bundler', { 'for': 'ruby' }
+    Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+    Plug 'sunaku/vim-ruby-minitest', { 'for': 'ruby' }
+    Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' }
+    Plug 'tpope/vim-rvm', { 'for': 'ruby' }
+    Plug 'p0deje/vim-ruby-interpolation', { 'for': 'ruby' }
+
+    " Rest
+    Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+    Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
     " Themes
     Plug 'nanotech/jellybeans.vim'
 
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     let g:coc_global_extensions = [
+          \ 'coc-tabnine',
           \ 'coc-tsserver',
+          \ 'coc-prettier',
           \ 'coc-html',
           \ 'coc-lists',
           \ 'coc-phpls',
@@ -218,20 +232,6 @@
             let g:markdown_fenced_languages = ['clojure', 'ruby']
         " }
 
-        " { Ale
-            let g:ale_echo_msg_format = '[%linter%] [%severity%] %s'
-            let g:ale_linters = {
-            \   'ruby': ['ruby', 'rubocop', 'reek', 'flog'],
-            \}
-            let g:ale_set_highlights = 0
-        " }
-
-        " " { Neomake
-        "     let g:neomake_elixir_enabled_makers = ['credo', 'mix']
-        "     let g:neomake_javascript_enabled_makers = ['eslint', 'flow']
-        "     let g:neomake_ruby_enabled_makers = ['mri', 'rubocop', 'reek', 'brakeman']
-        " " }
-
         " { Neoterm
             let g:neoterm_automap_keys = ',tt'
             let g:neoterm_use_relative_path = 1
@@ -276,6 +276,7 @@
 " { General options
     set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
     set completeopt=noinsert,menuone,noselect
+    set complete+=kspell
     set cb=unnamedplus
     set completefunc=syntaxcomplete#Complete
     set cursorline
@@ -284,11 +285,9 @@
     set hidden
     set hlsearch
     set ignorecase
-    set lazyredraw
     set nocursorline
     set wrap
     set number
-    set pastetoggle=<F2>
     set shiftwidth=4
     set smartcase
     set splitbelow
