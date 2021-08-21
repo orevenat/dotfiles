@@ -4,6 +4,9 @@
     signingkey = 850725111578E996
 [push]
     default = tracking
+[pull]
+    ff = only
+    rebase = true
 [diff]
     compactionHeuristic = true
     algorithm = patience

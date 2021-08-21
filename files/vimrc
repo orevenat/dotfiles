@@ -1,527 +1,338 @@
-setglobal nocompatible
-setglobal pastetoggle=<F2>
+let mapleader = "\<Space>"
 
-set ttyfast
-set lazyredraw
-
-let g:python_host_skip_check=1
-let g:loaded_python3_provider=1
-
-" { Plugins
-    call plug#begin('~/.vim/plugged')
-
-    " General
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-dispatch'
-    "Plug 'tpope/vim-endwise'
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-git'
-    Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-rhubarb'
-    Plug 'tpope/vim-sensible'
-    Plug 'tpope/vim-surround'
-    Plug 'janko-m/vim-test'
-    Plug 'editorconfig/editorconfig-vim'
-    Plug 'mhinz/vim-startify'
-
-    " Search and navigation
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
-    Plug 'dyng/ctrlsf.vim'
-    "Plug 'jlanzarotta/bufexplorer'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'jasoncodes/ctrlp-modified.vim'
-    Plug 'scrooloose/nerdtree'
-    Plug 'ruanyl/vim-gh-line'
-
-    " Autocomplete
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'Shougo/neocomplete'
-    Plug 'Shougo/neosnippet'
-    Plug 'Shougo/neosnippet-snippets'
-
-    " Advanced
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'ConradIrwin/vim-bracketed-paste'
-    Plug 'airblade/vim-gitgutter'
-    Plug 'kassio/neoterm'
-    Plug 'majutsushi/tagbar'
-    Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-    " Plug 'Valloric/MatchTagAlways'
-    Plug 'terryma/vim-multiple-cursors'
-    Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-    Plug 'kana/vim-textobj-user'
-    Plug 'powerman/vim-plugin-AnsiEsc'
-    Plug 'inkarkat/vim-ingo-library'
-    Plug 'inkarkat/vim-SyntaxRange'
-
-    " Tools integration
-    Plug 'hashivim/vim-vagrant'
-    Plug 'wfleming/vim-codeclimate'
-    Plug 'rizzatti/dash.vim'
-
-    " Languages support
-    Plug 'chase/vim-ansible-yaml'
-    Plug 'kchmck/vim-coffee-script'
-    Plug 'othree/html5.vim'
-    Plug 'tpope/vim-haml'
-    Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-    Plug 'dhruvasagar/vim-table-mode', { 'for': 'markdown' }
-    Plug 'shime/vim-livedown', { 'for': 'markdown' }
-
-    Plug 'slim-template/vim-slim', { 'for': ['slim', 'slime'] }
-    Plug 'tmux-plugins/vim-tmux'
-    Plug 'Glench/Vim-Jinja2-Syntax'
-    Plug 'lmeijvogel/vim-yaml-helper'
-    Plug 'kylef/apiblueprint.vim'
-    Plug 'IN3D/vim-raml'
-    Plug 'fidian/hexmode'
-    Plug 'martinda/Jenkinsfile-vim-syntax'
-    Plug 'jvirtanen/vim-hcl'
-
-    " C/C++
-    Plug 'rhysd/vim-clang-format'
-
-    " Clojure
-    Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-    Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
-    Plug 'tpope/vim-classpath', { 'for': 'clojure' }
-    Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-    Plug 'venantius/vim-eastwood', { 'for': 'clojure' }
-
-    Plug 'kovisoft/slimv', { 'for': ['clojure', 'scheme', 'racket'] }
-    Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
-
-    " Elixir
-    Plug 'elixir-editors/vim-elixir', { 'for': 'elixir' }
-    Plug 'c-brenn/phoenix.vim', { 'for': 'elixir' }
-
-    " Erlang
-    Plug 'vim-erlang/vim-erlang-runtime', { 'for': 'erlang' }
-    Plug 'vim-erlang/vim-erlang-compiler', { 'for': 'erlang' }
-
-    " Haskell
-    " Plug 'eagletmt/ghcmod-vim'
-    " Plug 'eagletmt/neco-ghc'
-    " Plug 'mpickering/hlint-refactor-vim'
-    " Plug 'neovimhaskell/haskell-vim'
-
-    " JavaScript
-    Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-    Plug 'maxmellon/vim-jsx-pretty', { 'for': 'javascript' }
-
-    " Ruby, Rails
-    Plug 'tpope/vim-rails', { 'for': 'ruby' }
-    Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-    Plug 'tpope/vim-bundler', { 'for': 'ruby' }
-
-    " Rest
-    Plug 'chrisbra/csv.vim', { 'for': 'csv' }
-    Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
-
-    " Themes
-    Plug 'nanotech/jellybeans.vim'
-
-    Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-    let g:coc_global_extensions = [
-          \ 'coc-tabnine',
-          \ 'coc-cspell-dicts',
-          \ 'coc-spell-checker',
-          \ 'coc-tsserver',
-          \ 'coc-html',
-          \ 'coc-lists',
-          \ 'coc-phpls',
-          \ 'coc-sh',
-          \ 'coc-css',
-          \ 'coc-stylelint',
-          \ 'coc-vimlsp',
-          \ 'coc-go',
-          \ 'coc-elixir',
-          \ 'coc-json',
-          \ 'coc-eslint',
-          \ 'coc-python',
-          \ 'coc-java',
-          \ 'coc-jest',
-          \ 'coc-solargraph',
-          \ 'coc-yaml',
-          \ 'coc-highlight',
-          \ 'coc-snippets',
-          \ 'coc-docker',
-          \ 'coc-diagnostic',
-          \]
-
-
-    call plug#end()
-
-    " { Plugin configuration
-
-	    let mapleader = "\<Space>"
-
-        let g:vim_markdown_frontmatter = 1
-        let g:vim_markdown_toc_autofit = 1
-        let g:vim_markdown_folding_disabled = 1
-
-        " { Alchemist (Elixir)
-            let g:alchemist_iex_term_size = 15
-            let g:alchemist_iex_term_split = 'split'
-            let g:alchemist_tag_disable = 1
-            let g:elixir_autobuild = 1
-            let g:elixir_docpreview = 1
-        " }
-
-        " { BufExplorer
-            let g:bufExplorerShowRelativePath=1
-        " }
-
-        " { CtrlP
-            if executable('rg')
-              set grepprg=rg\ --color=never
-              let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-              let g:ctrlp_use_caching = 0
-            endif
-        " }
-
-        " { CtrlSF
-            nmap     <C-F>f <Plug>CtrlSFPrompt
-            vmap     <C-F>f <Plug>CtrlSFVwordPath
-            vmap     <C-F>F <Plug>CtrlSFVwordExec
-            nmap     <C-F>n <Plug>CtrlSFCwordPath
-            nmap     <C-F>p <Plug>CtrlSFPwordPath
-            nnoremap <C-F>o :CtrlSFOpen<CR>
-            nnoremap <C-F>t :CtrlSFToggle<CR>
-            inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
-        " }
-
-        " { Fireplace (Clojure)
-            nmap <Leader>r :RunTests<CR>
-            autocmd User FireplacePreConnect call fireplace#register_port_file(expand('./nrepl-port'), '/')
-        " }
-
-        " { Ghc-mod (Haskell)
-            hi ghcmodType ctermbg=yellow
-            let g:ghcmod_type_highlight = 'ghcmodType'
-        " }
-
-        " { Haskell-vim
-            let g:haskellmode_completion_ghc = 0
-        " }
-
-        " { Jellybeans
-            silent! colorscheme jellybeans
-            let g:jellybeans_use_term_background_color = 1
-        " }
-
-        " { Vim-jsx
-            let g:jsx_ext_required = 0
-        " }
-
-        " { Vim-markdown
-            let g:markdown_fenced_languages = ['clojure', 'ruby']
-        " }
-
-        " { Neoterm
-            let g:neoterm_automap_keys = ',tt'
-            let g:neoterm_use_relative_path = 1
-            let g:neoterm_shell = 'bash -login'
-
-            nnoremap <silent> ,tc :call neoterm#kill()<cr>
-            nnoremap <silent> ,th :call neoterm#close()<cr>
-            nnoremap <silent> ,tl :call neoterm#clear()<cr>
-            nnoremap <silent> <f10> :TREPLSendFile<cr>
-            nnoremap <silent> <f9> :TREPLSend<cr>
-            vnoremap <silent> <f9> :TREPLSend<cr>
-        " }
-
-        " { NERDTree
-			let NERDTreeIgnore = ['\.pyc$', '\.retry$']
-
-            nmap <C-m> :NERDTreeFind<CR>
-            nmap <silent> <leader><leader> :NERDTreeToggle<CR>
-
-        " }
-
-		" { fzf
-			nnoremap <Leader>o :GFiles .<CR>
-            nnoremap <leader>fc :Commits<CR>
-            nnoremap <leader>ff :Files<CR>
-            nnoremap <leader>fa :Ag<CR>
-			nnoremap <leader>b :Buffers<CR>
-		" }
-
-        " { Vim-test
-            let test#strategy = "neovim"
-
-            nmap <silent> <leader>rt :TestSuite<CR>
-            nmap <silent> <leader>rf :TestFile<CR>
-            nmap <silent> <leader>rn :TestNearest<CR>
-            nmap <silent> <leader>rr :TestLast<CR>
-            nmap <silent> <leader>g :TestVisit<CR>
-        " }
-    " }
-" }
-
-" { General options
-    set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-    set completeopt=noinsert,menuone,noselect
-    set complete+=kspell
-    set cb=unnamedplus
-    set completefunc=syntaxcomplete#Complete
-    set cursorline
-    set diffopt+=vertical
-    set expandtab
-    set hidden
-    set hlsearch
-    set ignorecase
-    set nocursorline
-    set wrap
-    set number
-    set shiftwidth=4
-    set smartcase
-    set splitbelow
-    set splitright
-    set tabstop=4
-
-    " no backup
-    set nobackup
-    set nowritebackup
-    set noswapfile
-    set nowb
-" }
-
-" ================ Persistent Undo ==================
-" Keep undo history across sessions, by storing in file.
-" Only works all the time.
-if has('persistent_undo')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
-  set undodir=~/.vim/backups
-  set undofile
+" auto install vim-plug and plugins
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" ==================== KeyMap ========================
-nmap <F8> :TagbarToggle<CR>
-nnoremap <F5> :UndotreeToggle<cr>
+" https://github.com/chrisbra/matchit
+:packadd! matchit
+
+call plug#begin('~/.vim/plugged')
+
+"" MUST BE
+" Plug 'tpope/vim-sensible'
+" git support
+" Plug 'tpope/vim-fugitive'
+Plug 'honza/vim-snippets'
+" advanced welcome screen
+Plug 'mhinz/vim-startify'
+" Plug 'neomake/neomake'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-repeat'
+Plug 'nanotech/jellybeans.vim'
+Plug 'dyng/ctrlsf.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-projectionist'
+Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+Plug 'tpope/vim-endwise'
+Plug 'rlue/vim-barbaric'
+"Plug 'Raimondi/delimitMate'
+
+"" PROBABLY USEFULL
+" multi cursor
+" Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'AndrewRadev/splitjoin.vim'
+" database access
+Plug 'tpope/vim-dadbod'
+"Plug 'cohama/lexima.vim'
+Plug 'jpalardy/vim-slime', {'branch': 'main'}
+Plug 'editorconfig/editorconfig-vim'
+Plug 'puremourning/vimspector'
+Plug 'wellle/targets.vim'
+
+" Plug 'kassio/neoterm'
+" Plug 'tpope/vim-dispatch'
+
+""LANGAUGE SPECIFIC
+
+Plug 'sheerun/vim-polyglot'
+
+Plug 'tpope/vim-rails'
+" Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-bundler'
+" Plug 'tpope/vim-haml'
+" Plug 'slim-template/vim-slim'
+
+Plug 'pantharshit00/vim-prisma'
+
+" Plug 'lxhillwind/leader-clipboard'
+" Plug 'ConradIrwin/vim-bracketed-paste'
+" Plug 'hashivim/vim-terraform'
+" Plug 'chr4/nginx.vim'
+Plug 'janko-m/vim-test'
+" Plug 'jlanzarotta/bufexplorer'
+Plug 'lepture/vim-jinja'
+" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" Plug 'isobit/vim-caddyfile'
+
+" Targets.vim comes with five kinds for text objects:
+" Pair text objects
+" Quote text objects
+" Separator text objects
+" Argument text objects
+" Tag text objects
+" Plug 'othree/html5.vim'
+" Plug 'digitaltoad/vim-pug'
+" Plug 'elixir-editors/vim-elixir'
+" Plug 'vim-erlang/vim-erlang-runtime'
+" Plug 'vim-erlang/vim-erlang-compiler'
+" Auto close parentheses and repeat by dot dot dot...
+Plug 'c-brenn/phoenix.vim'
+
+" Plug 'jwalton512/vim-blade'
+Plug 'noahfrederick/vim-composer'
+Plug 'noahfrederick/vim-laravel'
+
+" Plug 'rhysd/vim-clang-format'
+" Plug 'tpope/vim-ragtag'
+
+" Plug 'eagletmt/ghcmod-vim'
+" Plug 'eagletmt/ghcmod-vim'
+" Plug 'neovimhaskell/haskell-vim'
+
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'udalov/kotlin-vim'
+
+" Plug 'moll/vim-node'
+" Plug 'mattn/emmet-vim', { 'for': 'html' }
+
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-easytags'
+" Plug 'Valloric/MatchTagAlways'
+
+" Plug 'plasticboy/vim-markdown'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+
+" Plug 'michaeljsmith/vim-indent-object'
+
+" Clojure
+" Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+" Plug 'tpope/vim-leiningen', { 'for': 'clojure' }
+" Plug 'tpope/vim-classpath', { 'for': 'clojure' }
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" Plug 'venantius/vim-eastwood', { 'for': 'clojure' }
+
+" Plug 'kovisoft/slimv', { 'for': ['clojure', 'scheme', 'racket'] }
+" Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
+
+" Plug 'chrisbra/csv.vim'
+Plug 'ekalinin/Dockerfile.vim'
+
+" \ 'coc-docker', https://github.com/neoclide/coc.nvim/pull/2756
+" \ 'coc-tabnine',
+" https://github.com/phpactor/coc-phpactor use when become popular
+let g:coc_global_extensions = [
+      \ 'coc-cspell-dicts',
+      \ 'coc-markdownlint',
+      \ 'coc-prisma',
+      \ 'coc-spell-checker',
+      \ 'coc-tsserver',
+      \ 'coc-prettier',
+      \ 'coc-html',
+      \ 'coc-lists',
+      \ 'coc-xml',
+      \ 'coc-phpls',
+      \ 'coc-sh',
+      \ 'coc-css',
+      \ 'coc-stylelint',
+      \ 'coc-vimlsp',
+      \ 'coc-go',
+      \ 'coc-elixir',
+      \ 'coc-json',
+      \ 'coc-eslint',
+      \ 'coc-pyright',
+      \ 'coc-java',
+      \ 'coc-java-debug',
+      \ 'coc-jest',
+      \ 'coc-solargraph',
+      \ 'coc-yaml',
+      \ 'coc-highlight',
+      \ 'coc-snippets',
+      \ 'coc-diagnostic',
+      \ 'coc-yank',
+      \ 'coc-git',
+      \]
+
+call plug#end()
+
+syntax on
+filetype plugin on
+
+" https://github.com/vim/vim/blob/master/runtime/doc/russian.txt
+" Enable hotkeys for Russian layout
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
+silent! colorscheme jellybeans
+
+" set visualbell
+" set completeopt=noinsert,menuone,noselect
+" set complete+=kspell
+
+if has('mouse')
+  set mouse=a
+endif
+
+" if has("clipboard")
+"   set clipboard=unnamed " copy to the system clipboard
+
+"   if has("unnamedplus") " X11 support
+"     set clipboard+=unnamedplus
+"   endif
+" endif
+
+" Don't redraw while executing macros (good performance config)
+" set lazyredraw
+" set ttyfast
+
+" set shortmess+=c
+
+" set cursorline
+" set hidden
+" set nofoldenable
+" set wrap
+" set linebreak
+set number
+set hlsearch
+set ignorecase
+" set smartcase
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+" set nobackup
+" set nowritebackup
+" set nowb
+" set noswapfile
+
+" set showcmd       " display incomplete commands
+" set autowrite     " Automatically :write before running commands
+
+" Use one space, not two, after punctuation.
+" set nojoinspaces
+
+" set softtabstop=4
+" new line indent: use spaces instead of tab
+" set smarttab
+" set smartindent
+" set expandtab
+
+" set softtabstop=2
+" set tabstop=2
+" new line indent: how many spaces for one tab
+" set shiftwidth=2
+"set tabstop=2
+" current line indent: how many spaces for one tab
+"set softtabstop=2
+
+" set updatetime=300
+" set splitbelow
+" set cmdheight=2
+" " TODO: replace with "number" when new neovim will be released
+set signcolumn=yes
+set scrolloff=3
+
+" Keep undo history across sessions, by storing in file.
+"silent !mkdir /tmp/.vim/backups > /dev/null 2>&1
+set undodir=/tmp/.vim/backups
+set undofile
+
+""" Basics Keymaps
 
 " Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with line wrapping on, this can cause the cursor to actually skip a few lines on the screen because it's moving from line N to line N+1 in the file. I want this to act more visually -- I want `down' to mean the next line on the screen
-nmap j gj
-nmap k gk
+" nmap j gj
+" nmap k gk
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
-nmap <silent> <leader>d <Plug>DashSearch
+" TODO: improve n+1 line moving by russian keys
+nnoremap <expr> л (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> о (v:count == 0 ? 'gj' : 'j')
+
+noremap <C-m> :make<CR>
 
 " Map ctrl-movement keys to window switching
 map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
-nnoremap <silent> <bs> <C-w><Left>
 
-" upper/lower word
-nmap <leader>u mQviwU`Q
-nmap <leader>l mQviwu`Q
+vmap "y "*y
+nmap "y "*y
+nmap "Y "*Y
+nmap "p "*p
+nmap "P "*P
 
-nmap <silent> // :nohlsearch<CR>
-noremap ,h1 :set hlsearch! hlsearch?<CR>
+" highlight last inserted text
+nnoremap gV `[v`]
+
+noremap <Leader>s :update<CR>
+
+" Edit .vimrc
+map <leader>vl :vsp $MYVIMRC<CR>
+map <leader>vr :source $MYVIMRC<CR>
+
+vmap gcc <plug>NERDCommenterToggle
+nmap gcc <plug>NERDCommenterToggle
+
+let g:NERDDefaultAlign = 'left'
+let g:NERDSpaceDelims = 1
+
+" https://github.com/tpope/vim-endwise/issues/11
+execute "inoremap {<CR> {<CR>}<ESC>O"
+
+autocmd FileType scss setl iskeyword+=@-@
+
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_toc_autofit = 1
+
+let g:slime_target = "neovim"
+
+" nmap     <C-F>f <Plug>CtrlSFPrompt
+" vmap     <C-F>f <Plug>CtrlSFVwordPath
+" vmap     <C-F>F <Plug>CtrlSFVwordExec
+" nmap     <C-F>n <Plug>CtrlSFCwordPath
+" nmap     <C-F>p <Plug>CtrlSFPwordPath
+" nnoremap <C-F>o :CtrlSFOpen<CR>
+" nnoremap <C-F>t :CtrlSFToggle<CR>
+" inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
+let g:vim_markdown_folding_disabled = 1
+
+" format the entire file
+" nnoremap ff :normal! gg=G``<CR>
 
 " set text wrapping toggles
-nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
+" nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
 
 " find merge conflict markers
-nmap <silent> <leader>fm <ESC>/\v^[<=>]{7}( .*\|$ )<CR>
+" nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 
-" save file
-nnoremap <Leader>w :w<CR>
-
-" ctrlp git modified
-map <Leader>m :CtrlPModified<CR>
-map <Leader>M :CtrlPBranch<CR>
-
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
+nmap <silent> // :nohlsearch<CR>
+" noremap <leader>hl :set hlsearch! hlsearch?<CR>
 
 " Allows you to enter sudo pass and save the file
-" when you forgot to open your file with sudo
-cmap w!! %!sudo tee > /dev/null null%
+" " when you forgot to open your file with sudo
+" cmap w!! %!sudo tee > /dev/null %
 
-" Allow to copy/paste between VIM instances
-" copy the current visual selection to ~/.vbuf
-vmap <Leader>y :w! ~/.vbuf<CR>
-" copy the current line to the buffer file if no visual selection
-nmap <Leader>y :.w! ~/.vbuf<CR>
-" paste the contents of the buffer file
-nmap <Leader>p :r ~/.vbuf<CR>
+nmap     <leader>fr <Plug>CtrlSFPrompt
 
-""" COC
+"set spell spelllang=en_us,ru_ru
 
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
-
-let g:coc_snippet_next = '<tab>'
-
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-"
-" " Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-" inoremap <silent><expr <>TAB>
-"       \ pumvisible() ? coc#_select_confirm() :
-"       \ coc#expandableOrJumpable() ? "\<C-r=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<>CR" :
-"       \ <"SID>check_back_space() ? "\<TAB" :
-"       \ coc#refresh()">
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Using CocList
-" Show all diagnostics
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" " Manage extensions
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" " Show commands
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" " Find symbol of current document
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" " Search workspace symbols
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" " Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" " Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" " Resume latest coc list
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-
-""" other
-
-augroup au_common
-    au!
-
-    " Automatically removing all trailing whitespace
-    au BufWritePre * :%s/\s\+$//e
-
-    au BufRead,BufNewFile {Capfile,Gemfile,Guardfile,Vagrantfile,*.prawn} set ft=ruby
-    au BufRead,BufNewFile {.babelrc,.eslintrc} set ft=json
-augroup END
-
-augroup ft_gitcommit
-    au!
-    au FileType gitcommit setlocal spell spelllang=en_us
-augroup END
-
-augroup ft_haskell
-    au!
-    au BufWritePost *.hs GhcModCheckAndLintAsync
-    au FileType haskell setlocal makeprg=stack
-    au FileType haskell setlocal omnifunc=necoghc#omnifunc
-    au FileType haskell nnoremap <silent><buffer> gfs :GhcModSplitFunCase<CR>
-    au FileType haskell nnoremap <silent><buffer> git :GhcModTypeInsert<CR>
-    au FileType haskell nnoremap <silent><buffer> gtt :GhcModType<CR>
-    au FileType haskell nnoremap <silent><buffer> gct :GhcModTypeClear<CR>
-augroup END
-
-augroup ft_markdown
-    au!
-    au FileType markdown setlocal spell spelllang=ru_ru,en_us
-    au FileType markdown setlocal wrap
-augroup END
-
-augroup ft_ruby
-    au FileType ruby call SyntaxRange#IncludeEx('keepend start="\%(<<[-\~]SQL\>.*\n\)\@<=" end="SQL" containedin=ALL', 'sql')
-augroup END
-
-augroup set_omnifunc
-    au!
-    au FileType css            setlocal omnifunc=csscomplete#CompleteCSS
-    au FileType html,markdown  setlocal omnifunc=htmlcomplete#CompleteTags
-    au FileType javascript     setlocal omnifunc=javascriptcomplete#CompleteJS
-    au FileType python         setlocal omnifunc=pythoncomplete#Complete
-    au FileType xml            setlocal omnifunc=xmlcomplete#CompleteTags
-augroup END
-
-augroup set_shift_width
-    au!
-    au FileType ruby  setl sw=2 sts=2 et
-    au FileType eruby setl sw=2 sts=2 et
-    au FileType javascript setl sw=2 sts=2 et
-    au FileType yaml setl sw=2 sts=2 et
-augroup END
-
-command! J :%!python -mjson.tool
+source ~/dotfiles/files/vim-configs/ale.vim
+source ~/dotfiles/files/vim-configs/coc.vim
+source ~/dotfiles/files/vim-configs/fzf.vim
+source ~/dotfiles/files/vim-configs/nerdtree.vim
+source ~/dotfiles/files/vim-configs/coc-fzf.vim
+source ~/dotfiles/files/vim-configs/coc-plugins.vim
+source ~/dotfiles/files/vim-configs/test.vim
