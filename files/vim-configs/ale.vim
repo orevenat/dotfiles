@@ -10,5 +10,5 @@ let g:ale_linters = {
 \   'haml': ['hamllint'],
 \   'slim': ['slimlint'],
 \   'java': ['checkstyle'],
-\   'ruby': ['brakeman', 'reek'],
+\   'ruby': ['brakeman', 'reek', 'rubocop'],
 \}

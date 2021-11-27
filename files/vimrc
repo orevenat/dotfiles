@@ -330,6 +330,7 @@ nmap     <leader>fr <Plug>CtrlSFPrompt
 
 "set spell spelllang=en_us,ru_ru
 
+source ~/dotfiles/files/vim-configs/airline.vim
 source ~/dotfiles/files/vim-configs/ale.vim
 source ~/dotfiles/files/vim-configs/coc.vim
 source ~/dotfiles/files/vim-configs/fzf.vim

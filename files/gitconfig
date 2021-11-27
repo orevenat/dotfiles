@@ -12,8 +12,8 @@
     algorithm = patience
 [color]
   ui = auto
-[commit]
-    gpgsign = true
+; [commit]
+;     gpgsign = true
 [core]
     editor = nvim
     excludesfile = ~/.gitignore_global
@@ -51,8 +51,8 @@
     ignore = update-index --assume-unchanged
     unignore = update-index --no-assume-unchanged
     ignored = !git ls-files -v | grep '^h'
-[gpg]
-    program = gpg
+; [gpg]
+;     program = gpg
 [log]
 	date = format:"%d-%b-%y %H:%M"
 [filter "lfs"]
